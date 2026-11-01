@@ -1,0 +1,6 @@
+ID,Text,Comment
+ChessPlanter.Tool.Title,Mixed planting,
+ChessPlanter.Tool.Description,"Drag an area to plant all picked crops in diagonal stripes, each with the same share. Fields that are already marked stay as they are.",
+ChessPlanter.Picker.Hint,Click a crop to pick it or leave it out:,
+ChessPlanter.Picker.None,No crop picked.,
+ChessPlanter.Picker.Locked,Still locked: {0},

@@ -1,0 +1,11 @@
+bin/
+obj/
+
+# Decompiled game sources, kept locally for looking up exact signatures.
+refs/
+
+# Build output; the rest of mod/ is source.
+mod/Scripts/
+
+*.user
+.DS_Store

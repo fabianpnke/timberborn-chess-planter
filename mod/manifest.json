@@ -1,0 +1,9 @@
+{
+  "Name": "Chess Planter",
+  "Version": "0.1.0",
+  "Id": "Timberborn.FabianPnke.ChessPlanter",
+  "MinimumGameVersion": "1.1.0.0",
+  "Description": "Plants several crops at once: pick the crops, drag an area, and the fields are marked in diagonal stripes so every crop gets the same share. Adds one tool to the Fields group.",
+  "RequiredMods": [],
+  "OptionalMods": []
+}

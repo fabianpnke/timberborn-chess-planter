@@ -1,0 +1,6 @@
+ID,Text,Comment
+ChessPlanter.Tool.Title,Gemischt pflanzen,
+ChessPlanter.Tool.Description,"Ziehe eine Fläche, um alle gewählten Sorten in diagonalen Streifen zu pflanzen, jede zu gleichen Teilen. Bereits markierte Felder bleiben unverändert.",
+ChessPlanter.Picker.Hint,Klicke eine Sorte an oder ab:,
+ChessPlanter.Picker.None,Keine Sorte gewählt.,
+ChessPlanter.Picker.Locked,Noch gesperrt: {0},

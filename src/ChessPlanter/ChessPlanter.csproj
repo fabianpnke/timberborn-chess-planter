@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Timberborn.FabianPnke.ChessPlanter</AssemblyName>
+    <RootNamespace>ChessPlanter</RootNamespace>
+    <DebugType>embedded</DebugType>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>$(MSBuildThisFileDirectory)../../mod/Scripts/</OutputPath>
+  </PropertyGroup>
+
+  <!--
+    Where the game's managed assemblies live. Override with the TIMBERBORN_MANAGED
+    environment variable, or by passing -p:TimberbornManaged=... to dotnet build.
+  -->
+  <PropertyGroup>
+    <TimberbornManaged Condition="'$(TimberbornManaged)' == ''">$(TIMBERBORN_MANAGED)</TimberbornManaged>
+    <TimberbornManaged Condition="'$(TimberbornManaged)' == '' AND '$(OS)' != 'Windows_NT'">$(HOME)/Library/Application Support/Steam/steamapps/common/Timberborn/Timberborn.app/Contents/Resources/Data/Managed</TimberbornManaged>
+    <TimberbornManaged Condition="'$(TimberbornManaged)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Timberborn\Timberborn_Data\Managed</TimberbornManaged>
+  </PropertyGroup>
+
+  <Target Name="CheckGameAssemblies" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(TimberbornManaged)')"
+           Text="Timberborn's managed assemblies were not found at '$(TimberbornManaged)'. Set the TIMBERBORN_MANAGED environment variable to the folder holding Timberborn.*.dll." />
+  </Target>
+
+  <ItemGroup>
+    <!-- Dependency injection and mod entry -->
+    <TimberbornReference Include="Bindito.Core" />
+    <TimberbornReference Include="Timberborn.SingletonSystem" />
+    <TimberbornReference Include="Timberborn.ModManagerScene" />
+
+    <!-- Specs, templates, assets -->
+    <TimberbornReference Include="Timberborn.AssetSystem" />
+    <TimberbornReference Include="Timberborn.Common" />
+    <TimberbornReference Include="Timberborn.BlueprintSystem" />
+    <TimberbornReference Include="Timberborn.EntitySystem" />
+    <TimberbornReference Include="Timberborn.TemplateSystem" />
+
+    <!-- Planting: the field map, its validation and the vanilla crop tools -->
+    <TimberbornReference Include="Timberborn.Planting" />
+    <TimberbornReference Include="Timberborn.PlantingUI" />
+    <TimberbornReference Include="Timberborn.TerrainQueryingSystem" />
+
+    <!-- Tools, the bottom bar and area selection -->
+    <TimberbornReference Include="Timberborn.AreaSelectionSystemUI" />
+    <TimberbornReference Include="Timberborn.BottomBarSystem" />
+    <TimberbornReference Include="Timberborn.GameSound" />
+    <TimberbornReference Include="Timberborn.SelectionSystem" />
+    <TimberbornReference Include="Timberborn.SelectionToolSystem" />
+    <TimberbornReference Include="Timberborn.ToolButtonSystem" />
+    <TimberbornReference Include="Timberborn.ToolSystem" />
+    <TimberbornReference Include="Timberborn.ToolSystemUI" />
+
+    <!-- UI -->
+    <TimberbornReference Include="Timberborn.CoreUI" />
+    <TimberbornReference Include="Timberborn.Localization" />
+
+    <!-- Unity -->
+    <TimberbornReference Include="UnityEngine" />
+    <TimberbornReference Include="UnityEngine.CoreModule" />
+    <TimberbornReference Include="UnityEngine.UIElementsModule" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Records in the game's specs use immutable arrays, which netstandard2.1 lacks. -->
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>$(TimberbornManaged)/System.Collections.Immutable.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="@(TimberbornReference)">
+      <HintPath>$(TimberbornManaged)/%(Identity).dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
