@@ -21,6 +21,8 @@ if [[ ! -d "$mods_dir" ]]; then
 fi
 
 mkdir -p "$target"
-rsync -a --delete --exclude '.DS_Store' "$repo/mod/" "$target/"
+# The game's Workshop uploader keeps the item id in workshop_data.json inside the installed
+# folder. Excluded, so --delete leaves it alone and updates go to the same Workshop item.
+rsync -a --delete --exclude '.DS_Store' --exclude 'workshop_data.json' "$repo/mod/" "$target/"
 
 echo "Installed to $target"
