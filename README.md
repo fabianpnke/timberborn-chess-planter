@@ -22,8 +22,11 @@ Water crops start switched off because they would only leave gaps on dry land.
 ```
 
 This builds `mod/Scripts/Timberborn.FabianPnke.ChessPlanter.dll` and copies `mod/` to
-`~/Documents/Timberborn/Mods/ChessPlanter`. The icon is drawn by
-`scripts/make_icon.py`.
+`~/Documents/Timberborn/Mods/ChessPlanter`. The tool icon is drawn by
+`scripts/make_icon.py` and the Workshop thumbnail by `scripts/make_thumbnail.py`.
+
+To publish, open Mods in the game's main menu and click "Upload to Steam Workshop". For an
+update, bump `Version` in `mod/manifest.json`, run `./build.sh` and upload again.
 
 Built against Timberborn 1.1.2.8. The decompiled game sources used as reference are
 in `../timberborn-companion-v2/reference/1.1.2.8/decompiled`.
